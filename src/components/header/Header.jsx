@@ -1,10 +1,11 @@
-
 import React, { useRef, useEffect } from 'react';
+
 import { Link, useLocation } from 'react-router-dom';
 
 import './header.scss';
 
 import logo from '../../assets/tmovie.png';
+
 const headerNav = [
     {
         display: 'Home',
@@ -21,10 +22,12 @@ const headerNav = [
 ];
 
 const Header = () => {
+
     const { pathname } = useLocation();
     const headerRef = useRef(null);
 
     const active = headerNav.findIndex(e => e.path === pathname);
+
     useEffect(() => {
         const shrinkHeader = () => {
             if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
@@ -38,6 +41,7 @@ const Header = () => {
             window.removeEventListener('scroll', shrinkHeader);
         };
     }, []);
+
     return (
         <div ref={headerRef} className="header">
             <div className="header__wrap container">
@@ -47,10 +51,10 @@ const Header = () => {
                 </div>
                 <ul className="header__nav">
                     {
-                        headerNav.map((item, i) => (
+                        headerNav.map((e, i) => (
                             <li key={i} className={`${i === active ? 'active' : ''}`}>
-                                <Link to={item.path}>
-                                    {item.display}
+                                <Link to={e.path}>
+                                    {e.display}
                                 </Link>
                             </li>
                         ))
@@ -58,7 +62,7 @@ const Header = () => {
                 </ul>
             </div>
         </div>
-    )
+    );
 }
 
-export default Header
+export default Header;
